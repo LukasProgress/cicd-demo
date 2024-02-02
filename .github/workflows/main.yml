@@ -1,7 +1,7 @@
 name: Checkout
 
 on:
-  [workflow_dispatch]
+  [workflow_dispatch, push]
 
 jobs:
 
