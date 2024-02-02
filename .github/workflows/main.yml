@@ -37,13 +37,13 @@ jobs:
 
   bring_live:
     runs-on: [aws-ec2]
+    needs: publish
+    steps:
+      - name: fetch image
+        run: docker pull lukasprogress/cicd-demo:latest
 
-      steps:
-        - name: fetch image
-          run: docker pull lukasprogress/cicd-demo:latest
+      - name: remove old container
+        run: docker container rm -f server
 
-        - name: remove old container
-          run: docker container rm -f server
-
-        - name: run new container
-          run: docker container run -p 3000:3000 -d --name server lukasprogress/cicd-demo:latest
+      - name: run new container
+        run: docker container run -p 3000:3000 -d --name server lukasprogress/cicd-demo:latest
