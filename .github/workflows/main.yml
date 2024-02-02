@@ -4,16 +4,15 @@ on:
   [push]
 
 jobs:
+
   build:
-    strategy:
-      matrix:
-        os: [windows-latest, ubuntu-latest, macOS-latest]
-        checkout: [Funktioniert_1, Funktioniert_2]
-
-    runs-on: ${{ matrix.os }}
-
+    runs-on: ubuntu-latest
+    
     steps:
       - name: checkout
         uses: actions/checkout@v4
-      - run: echo "${{matrix.checkout}}"
+      - name: Build and test
+        run: |
+          npm install
+          npm test
         
